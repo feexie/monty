@@ -9,21 +9,13 @@ void push(stack_t **stack, unsigned int line_num)
 {
 	char *arg = arg_holder.arg;
 
-	if (!arg)
+	if (!arg || !isnum(arg))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_num);
 		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 
-	if (!isnum(arg))
-	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_num);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
-
-	/* Create a new stack element */
 	stack_t *new = malloc(sizeof(stack_t));
 	if (!new)
 	{
@@ -34,10 +26,10 @@ void push(stack_t **stack, unsigned int line_num)
 
 	new->n = atoi(arg);
 	new->prev = NULL;
+	new->next = *stack;
 
 	if (*stack)
 	{
-		new->next = *stack;
 		(*stack)->prev = new;
 	}
 
