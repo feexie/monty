@@ -25,7 +25,8 @@ int main(int argc, char **argv)
  */
 void opcode(char *command, unsigned int line_num, stack_t **stack)
 {
-	int i = 0;
+	int y
+	y = 0;
 	instruction_t ops[] = {
 		{"push", push},
 		{"pall", pall},
@@ -35,14 +36,6 @@ void opcode(char *command, unsigned int line_num, stack_t **stack)
 		{"add", add},
 		{"nop", nop},
 		{"sub", sub},
-		{"div", _div},
-		{"mul", mul},
-		{"mod", mod},
-		{"pchar", pchar},
-		{"pstr", pstr},
-		{"rotl", rotl},
-		{"rotr", rotr},
-		{NULL, NULL}
 	};
 
 	if (command[0] == '#')
@@ -78,7 +71,7 @@ void opcode(char *command, unsigned int line_num, stack_t **stack)
  * free_stack - free the stack and the str input
  * @head: input list pointer
  */
-void free_stack(stack_t **head)
+void f_stack(stack_t **head)
 {
 	stack_t *current;
 
@@ -98,7 +91,7 @@ void free_stack(stack_t **head)
  * make_buffer - make the buffer and parse through the file
  * @file_name: name of the file
  */
-void make_buffer(char *file_name)
+void m_buffer(char *file_name)
 {
 	size_t size = 0;
 	FILE *file_input;
