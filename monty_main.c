@@ -1,9 +1,9 @@
 #include "monty.h"
 
 /**
- * main - Main program running byte ocde.
+ * main - Entry point & Main program running byte ocde.
  * @argc: Number of arguments.
- * @argv: Argument in matrix.
+ * @argv: Argument in vector.
  * Return: Return exit success.
  */
 int main(int argc, char **argv)
@@ -13,12 +13,12 @@ int main(int argc, char **argv)
 		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	make_buffer(argv[1]);
+	m_buffer(argv[1]);
 	return (EXIT_SUCCESS);
 }
 
 /**
- * opcode - check for operation code
+ * opcode - operation code
  * @command: cammand input
  * @line_num: line number
  * @stack: stack of memory
@@ -52,23 +52,23 @@ void opcode(char *command, unsigned int line_num, stack_t **stack)
 		arg_holder.SQ = 0;
 		return;
 	}
-	while (ops[i].opcode != NULL)
+	while (ops[y].opcode != NULL)
 	{
-		if (strcmp(ops[i].opcode, command) == 0)
+		if (strcmp(ops[y].opcode, command) == 0)
 		{
-			ops[i].f(stack, line_num);
+			ops[y].f(stack, line_num);
 			return;
 		}
-		i++;
+		y++;
 	}
 	printf("L%d: unknown instruction %s\n", line_num, command);
-	free_stack(stack);
+	f_stack(stack);
 	exit(EXIT_FAILURE);
 }
 
 #include "monty.h"
 /**
- * free_stack - free the stack and the str input
+ * f_stack - free the stack and the input
  * @head: input list pointer
  */
 void f_stack(stack_t **head)
@@ -88,7 +88,7 @@ void f_stack(stack_t **head)
 }
 
 /**
- * make_buffer - make the buffer and parse through the file
+ * m_buffer - make the buffer and parse through the file
  * @file_name: name of the file
  */
 void m_buffer(char *file_name)
@@ -126,5 +126,5 @@ void m_buffer(char *file_name)
 		opcode(command, linenum, &stack);
 		linenum++;
 	}
-	free_stack(&stack);
+	f_stack(&stack);
 }
