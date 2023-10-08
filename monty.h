@@ -3,7 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <ctype.h>
+#include <fcntl.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -16,9 +20,9 @@
  */
 typedef struct stack_s
 {
-	int n;
-	struct stack_s *prev;
-	struct stack_s *next;
+        int n;
+        struct stack_s *prev;
+        struct stack_s *next;
 } stack_t;
 
 /**
@@ -31,26 +35,26 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+        char *opcode;
+        void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/*Declaration of the stack variable as extern*/
 extern stack_t *stack;
+extern char *item;
 
-
-/*Function prototypes*/
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
-
-void opcode(char *command, unsigned int line_num, stack_t **stack);
-void f_stack(stack_t **head);
-void m_buffer(char *file_name);
+int count_layers(stack_t **stack);
+void pushf(stack_t **stack, unsigned int line_number);
+void pallf(stack_t **stack, unsigned int line_number);
+void pintf(stack_t **stack, unsigned int line_number);
+void popf(stack_t **stack, unsigned int line_number);
+void swapf(stack_t **stack, unsigned int line_number);
+void addf(stack_t **stack, unsigned int line_number);
+void nopf(stack_t **stack, unsigned int line_number);
+void stripf(char *line);
+char **tokenizef(char **line);
+void execute(unsigned int *line_number, char *line);
+char* _strdup(const char* str);
+void free_stack(stack_t *stack);
+void free_command(char **command);
 
 #endif /* MONTY_H */
-
